@@ -1,6 +1,3 @@
-version: '3'
-
-
 services:
   bitwarden:
     # Standard Bitwarden is very resource-heavy and cannot run on micro cloud instances
@@ -13,7 +10,7 @@ services:
     - ${PWD}/bitwarden:/data
     environment:
     - LOG_FILE=/dev/stdout
-    - WEBSOCKET_ENABLED=true            # required for websockets
+    - ENABLE_WEBSOCKET=true
     - SHOW_PASSWORD_HINT=false
     - DOMAIN=https://${DOMAIN}          # DOMAIN is set in .env but doesn't have protocol prefix
     - SMTP_FROM_NAME=Bitwarden (${DOMAIN})
@@ -42,7 +39,7 @@ services:
     - ${PWD}/nginx/sites-enabled:/etc/nginx/sites-enabled:ro
   
   cloudflared:
-    image: cloudflare/cloudflared:2021.9.2-amd64
+    image: cloudflare/cloudflared:latest
     restart: always
     user: root
     entrypoint: cloudflared --credentials-file /etc/cloudflared/tunnel.json --url http://proxy:80 tunnel run $CLOUDFLARED_TUNNEL_NAME

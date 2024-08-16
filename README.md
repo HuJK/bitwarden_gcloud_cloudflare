@@ -108,6 +108,19 @@ $ sudo journalctl -u google-startup-scripts.service
 
 Now the script will wait until a reboot is pending and then schedule a reboot for the time configured in the script.
 
+## Configure Push Notifications(_optional_)
+From `1.29.0`,Vaultwarden support automatically sync in mobile app depends on push notifications.
+
+1. Go to https://bitwarden.com/host/ insert your email address and you'll get an INSTALLATION ID and KEY.
+
+2. Insert the correct ID and the KEY from the previous step into `.env` file:
+
+```yaml
+PUSH_ENABLED=true
+PUSH_INSTALLATION_ID=
+PUSH_INSTALLATION_KEY=
+```
+
 ## Step 3: Start Services
 
 To start up, use `docker-compose`:
